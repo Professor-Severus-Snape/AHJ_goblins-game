@@ -22,6 +22,11 @@ a {
   color: inherit;
 }
 
+div,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   display: grid;
   grid-template-columns: 1fr;

@@ -1,5 +1,7 @@
 # Домашнее задание к занятию "2. DOM" и занятию "3. Обработка событий"
 
+[![Build status](https://ci.appveyor.com/api/projects/status/cua6va7e20kshoey?svg=true)](https://ci.appveyor.com/project/Professor-Severus-Snape/ahj-goblins-game)
+
 Правила сдачи задания:
 
 1. В рамках этого ДЗ можно использовать любой менеджер пакетов.

@@ -4374,9 +4374,7 @@ var es_regexp_exec = __webpack_require__(7495);
 var es_regexp_to_string = __webpack_require__(8781);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__(3500);
-;// CONCATENATED MODULE: ./src/img/goblin.png
-const goblin_namespaceObject = __webpack_require__.p + "img/goblin.png";
-;// CONCATENATED MODULE: ./src/js/Goblin.js
+;// CONCATENATED MODULE: ./src/js/Field.js
 
 
 
@@ -4393,14 +4391,43 @@ function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), 
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+var Field = /*#__PURE__*/_createClass(function Field() {
+  _classCallCheck(this, Field);
+  this.fieldElement = document.createElement('div');
+  this.fieldElement.classList.add('field');
+  for (var i = 1; i < 17; i += 1) {
+    var cellElement = document.createElement('div');
+    cellElement.classList.add('cell', "cell-".concat(i));
+    this.fieldElement.append(cellElement);
+  }
+});
 
-var Goblin = /*#__PURE__*/_createClass(function Goblin() {
-  _classCallCheck(this, Goblin);
-  var goblinElement = document.createElement('img');
-  goblinElement.classList.add('goblin');
-  goblinElement.src = goblin_namespaceObject;
-  goblinElement.alt = 'гоблин';
-  this.goblin = goblinElement;
+;// CONCATENATED MODULE: ./src/img/goblin.png
+const goblin_namespaceObject = __webpack_require__.p + "img/goblin.png";
+;// CONCATENATED MODULE: ./src/js/Goblin.js
+
+
+
+
+
+
+
+
+
+
+function Goblin_typeof(o) { "@babel/helpers - typeof"; return Goblin_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, Goblin_typeof(o); }
+function Goblin_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, Goblin_toPropertyKey(o.key), o); } }
+function Goblin_createClass(e, r, t) { return r && Goblin_defineProperties(e.prototype, r), t && Goblin_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function Goblin_toPropertyKey(t) { var i = Goblin_toPrimitive(t, "string"); return "symbol" == Goblin_typeof(i) ? i : i + ""; }
+function Goblin_toPrimitive(t, r) { if ("object" != Goblin_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != Goblin_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function Goblin_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+
+var Goblin = /*#__PURE__*/Goblin_createClass(function Goblin() {
+  Goblin_classCallCheck(this, Goblin);
+  this.goblinElement = document.createElement('img');
+  this.goblinElement.classList.add('goblin');
+  this.goblinElement.src = goblin_namespaceObject;
+  this.goblinElement.alt = 'гоблин';
 });
 
 ;// CONCATENATED MODULE: ./src/js/Modal.js
@@ -4423,21 +4450,21 @@ function Modal_toPrimitive(t, r) { if ("object" != Modal_typeof(t) || !t) return
 var Modal = /*#__PURE__*/function () {
   function Modal() {
     Modal_classCallCheck(this, Modal);
-    this.modal = document.querySelector('.modal');
-    this.closeBg = this.modal.querySelector('.modal__close-bg');
-    this.closeBtn = this.modal.querySelector('.modal__close-btn');
-    this.title = this.modal.querySelector('.modal__title');
-    this.modalButton = this.modal.querySelector('.modal__button');
+    this.modalElement = document.querySelector('.modal');
+    this.closeBg = this.modalElement.querySelector('.modal__close-bg');
+    this.closeBtn = this.modalElement.querySelector('.modal__close-btn');
+    this.title = this.modalElement.querySelector('.modal__title');
+    this.modalBtn = this.modalElement.querySelector('.modal__btn');
   }
   return Modal_createClass(Modal, [{
     key: "show",
     value: function show() {
-      this.modal.classList.remove('modal_hidden');
+      this.modalElement.classList.remove('modal_hidden');
     }
   }, {
     key: "hide",
     value: function hide() {
-      this.modal.classList.add('modal_hidden');
+      this.modalElement.classList.add('modal_hidden');
     }
   }]);
 }();
@@ -4473,16 +4500,20 @@ function Game_toPropertyKey(t) { var i = Game_toPrimitive(t, "string"); return "
 function Game_toPrimitive(t, r) { if ("object" != Game_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != Game_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
+
 var Game = /*#__PURE__*/function () {
   function Game() {
     var _this = this;
     Game_classCallCheck(this, Game);
     this.modal = new Modal();
-    this.goblin = new Goblin().goblin;
-    this.cells = _toConsumableArray(document.querySelectorAll('.cell'));
-    this.startBtn = document.querySelector('.start-game');
-    this.scoreElement = document.querySelector('.score');
-    this.missCountElement = document.querySelector('.miss');
+    this.field = new Field().fieldElement;
+    this.goblin = new Goblin().goblinElement;
+    this.controller = document.querySelector('.controller');
+    this.controller.after(this.field);
+    this.cells = _toConsumableArray(this.field.querySelectorAll('.cell'));
+    this.startBtn = document.querySelector('.start');
+    this.score = document.querySelector('.score');
+    this.miss = document.querySelector('.miss');
     this.previousIndex = null;
     this.currentIndex = null;
     this.previousScore = 0;
@@ -4494,7 +4525,7 @@ var Game = /*#__PURE__*/function () {
     this.startBtn.addEventListener('click', this.onStartBtnClick.bind(this));
     this.modal.closeBg.addEventListener('click', this.onModalCloseClick.bind(this));
     this.modal.closeBtn.addEventListener('click', this.onModalCloseClick.bind(this));
-    this.modal.modalButton.addEventListener('click', this.onModalButtonClick.bind(this));
+    this.modal.modalBtn.addEventListener('click', this.onModalBtnClick.bind(this));
   }
   return Game_createClass(Game, [{
     key: "onStartBtnClick",
@@ -4508,7 +4539,7 @@ var Game = /*#__PURE__*/function () {
       if (event.target === this.goblin) {
         this.goblin.remove();
         this.currentScore += 1;
-        this.scoreElement.textContent = "\u041F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u044F: ".concat(this.currentScore);
+        this.score.textContent = "\u041F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u044F: ".concat(this.currentScore);
       }
     }
   }, {
@@ -4517,8 +4548,8 @@ var Game = /*#__PURE__*/function () {
       this.modal.hide();
     }
   }, {
-    key: "onModalButtonClick",
-    value: function onModalButtonClick() {
+    key: "onModalBtnClick",
+    value: function onModalBtnClick() {
       this.modal.hide();
       this.start();
     }
@@ -4529,14 +4560,14 @@ var Game = /*#__PURE__*/function () {
       this.previousScore = 0;
       this.currentScore = 0;
       this.missCount = 0;
-      this.scoreElement.textContent = 'Попадания: 0';
-      this.missCountElement.textContent = 'Промахи: 0';
+      this.score.textContent = 'Попадания: 0';
+      this.miss.textContent = 'Промахи: 0';
       this.moveGoblin();
       this.intervalId = setInterval(function () {
         _this2.moveGoblin();
         if (_this2.previousScore === _this2.currentScore) {
           _this2.missCount += 1;
-          _this2.missCountElement.textContent = "\u041F\u0440\u043E\u043C\u0430\u0445\u0438: ".concat(_this2.missCount);
+          _this2.miss.textContent = "\u041F\u0440\u043E\u043C\u0430\u0445\u0438: ".concat(_this2.missCount);
           if (_this2.missCount > 4) {
             _this2.stop();
             _this2.modal.show();

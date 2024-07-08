@@ -1,17 +1,17 @@
 export default class Modal {
   constructor() {
-    this.modal = document.querySelector('.modal');
-    this.closeBg = this.modal.querySelector('.modal__close-bg');
-    this.closeBtn = this.modal.querySelector('.modal__close-btn');
-    this.title = this.modal.querySelector('.modal__title');
-    this.modalButton = this.modal.querySelector('.modal__button');
+    this.modalElement = document.querySelector('.modal');
+    this.closeBg = this.modalElement.querySelector('.modal__close-bg');
+    this.closeBtn = this.modalElement.querySelector('.modal__close-btn');
+    this.title = this.modalElement.querySelector('.modal__title');
+    this.modalBtn = this.modalElement.querySelector('.modal__btn');
   }
 
   show() {
-    this.modal.classList.remove('modal_hidden');
+    this.modalElement.classList.remove('modal_hidden');
   }
 
   hide() {
-    this.modal.classList.add('modal_hidden');
+    this.modalElement.classList.add('modal_hidden');
   }
 }

@@ -4657,11 +4657,10 @@ var App = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       var copyrights = new Copyrights();
-      if (copyrights.copyrights === '© Professor-Severus-Snape, 2024') {
-        this.game = new Game();
-        return;
+      if (copyrights.copyrights !== '© Professor-Severus-Snape, 2024') {
+        Copyrights.stoleRights();
       }
-      Copyrights.stoleRights();
+      this.game = new Game();
     }
   }]);
 }();
